@@ -28,23 +28,23 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
             font-family: 'Poppins', sans-serif;
         }
 
-        html {
-            scroll-behavior: smooth;
-        }
-
-        body {
-            line-height: 1.6;
-            color: var(--text-color);
+        html, body {
+            width: 100%;
             overflow-x: hidden;
+            position: relative;
         }
 
         .container {
+            width: 100%;
             max-width: 1200px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding: 0 15px;
+            position: relative;
         }
 
         .btn {
@@ -238,7 +238,9 @@
 
         /* Hero Section */
         .hero {
-            height: 100vh;
+            height: auto;
+            min-height: 100vh;
+            padding: 60px 0;
             background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('photos/p1.png');
             background-size: cover;
             background-position: center;
@@ -265,7 +267,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 1;
-            padding: 0 20px;
+            padding: 0 15px;
         }
 
         .hero h1 {
@@ -736,19 +738,20 @@
         .mobile-menu {
             position: fixed;
             top: 0;
-            right: -300px;
-            width: 300px;
+            right: -100%;
+            width: 100%;
             height: 100vh;
             background-color: var(--white);
             box-shadow: var(--shadow-lg);
             z-index: 1001;
-            transition: var(--transition);
+            transition: transform 0.3s ease;
             padding: 20px;
             overflow-y: auto;
         }
 
         .mobile-menu.active {
             right: 0;
+            transform: translateX(0);
         }
 
         .mobile-menu-header {
@@ -1324,10 +1327,17 @@
             .mobile-menu {
                 width: 100%;
                 right: -100%;
+                transform: translateX(0);
+                transition: transform 0.3s ease;
             }
 
             .mobile-menu.active {
                 right: 0;
+                transform: translateX(0);
+            }
+
+            .main-header {
+                padding: 10px 0;
             }
 
             .main-header .container {
@@ -1339,32 +1349,41 @@
             }
 
             .logo img {
-                height: 40px;
+                height: 35px;
+            }
+
+            .hero {
+                height: auto;
+                min-height: 100vh;
+                padding: 60px 0;
             }
 
             .hero-content {
                 padding: 0 15px;
             }
 
-            .hero h1 {
-                font-size: 2rem;
+            .section-heading {
+                margin-bottom: 30px;
             }
 
-            .section-heading h2 {
-                font-size: 1.8rem;
-            }
-
-            .about-content, .contact-content {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-
-            .services-grid, .products-grid, .clients-grid {
-                grid-template-columns: 1fr;
-            }
-
+            .services-grid,
+            .products-grid,
+            .clients-grid,
             .capabilities-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .product-card,
+            .service-card,
+            .client-logo,
+            .capability-item {
+                width: 100%;
+                margin: 0;
+            }
+
+            .contact-form {
+                padding: 20px;
             }
 
             .footer-content {
@@ -1372,21 +1391,27 @@
                 gap: 20px;
             }
 
+            .footer-column {
+                padding: 0 15px;
+            }
+
             .product-modal-content {
-                width: 95%;
-                max-height: 85vh;
+                width: 100%;
+                height: 100vh;
+                max-height: 100vh;
+                border-radius: 0;
             }
 
             .product-modal-grid {
                 grid-template-columns: 1fr;
-                padding: 20px;
+                padding: 15px;
             }
         }
 
         /* Fix Tablet Responsive Issues */
         @media screen and (min-width: 769px) and (max-width: 1024px) {
             .container {
-                max-width: 90%;
+                max-width: 95%;
             }
 
             .services-grid {
@@ -1394,15 +1419,11 @@
             }
 
             .products-grid {
-                grid-template-columns: repeat(3, 1fr);
+                grid-template-columns: repeat(2, 1fr);
             }
 
             .clients-grid {
                 grid-template-columns: repeat(3, 1fr);
-            }
-
-            .capabilities-grid {
-                grid-template-columns: repeat(2, 1fr);
             }
         }
 
@@ -1410,6 +1431,49 @@
         @media screen and (min-width: 1025px) {
             .container {
                 max-width: 1200px;
+            }
+        }
+
+        /* Prevent horizontal scrolling */
+        @media screen and (max-width: 768px) {
+            .hero,
+            section,
+            .main-header,
+            .footer-content,
+            .contact-content,
+            .about-content {
+                width: 100%;
+                overflow-x: hidden;
+            }
+
+            .product-card,
+            .service-card,
+            .client-logo,
+            .capability-item {
+                width: 100%;
+                margin: 0;
+            }
+        }
+
+        /* Fix for images */
+        img {
+            max-width: 100%;
+            height: auto;
+        }
+
+        /* Loading screen mobile fix */
+        @media screen and (max-width: 768px) {
+            .speaker-3d-container {
+                width: 150px;
+                height: 150px;
+            }
+
+            .loading-progress {
+                width: 150px;
+            }
+
+            .loading-text {
+                font-size: 1rem;
             }
         }
     </style>
