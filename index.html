@@ -1,0 +1,2014 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PanFlash Technology</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #2563eb;
+            --secondary-color: #1d4ed8;
+            --accent-color: #3b82f6;
+            --text-color: #1f2937;
+            --light-text: #4b5563;
+            --white: #ffffff;
+            --light-bg: #f3f4f6;
+            --dark-bg: #111827;
+            --transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+            --shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            line-height: 1.6;
+            color: var(--text-color);
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 5px;
+            font-weight: 600;
+            text-transform: uppercase;
+            transition: var(--transition);
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        .btn:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        .section-heading {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+
+        .section-heading h2 {
+            font-size: 2.5rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .section-heading h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: var(--primary-color);
+        }
+
+        .section-heading p {
+            color: var(--light-text);
+            max-width: 700px;
+            margin: 0 auto;
+            font-size: 1.1rem;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: var(--white);
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            transition: var(--transition);
+        }
+
+        header.scrolled {
+            background-color: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+        }
+
+        .header-top {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            color: var(--white);
+            padding: 8px 0;
+            font-size: 0.9rem;
+        }
+
+        .header-top .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .contact-info a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .contact-info a:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            color: var(--white);
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        .main-header {
+            padding: 15px 0;
+            background-color: var(--white);
+        }
+
+        .main-header .container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+
+        .logo img {
+            height: 50px;
+            transition: var(--transition);
+        }
+
+        .logo:hover img {
+            transform: scale(1.05);
+        }
+
+        .main-nav ul {
+            display: flex;
+            gap: 30px;
+            margin: 0;
+            padding: 0;
+            list-style: none;
+        }
+
+        .main-nav a {
+            color: var(--text-color);
+            font-weight: 500;
+            padding: 8px 0;
+            position: relative;
+            transition: var(--transition);
+            text-decoration: none;
+        }
+
+        .main-nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: var(--primary-color);
+            transition: var(--transition);
+        }
+
+        .main-nav a:hover {
+            color: var(--primary-color);
+        }
+
+        .main-nav a:hover::after {
+            width: 100%;
+        }
+
+        .main-nav a.active {
+            color: var(--primary-color);
+        }
+
+        .main-nav a.active::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('photos/p1.png');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
+            color: var(--white);
+            display: flex;
+            align-items: center;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, rgba(0, 134, 204, 0.3), rgba(0, 102, 153, 0.3));
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 1;
+            padding: 0 20px;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            line-height: 1.2;
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+        }
+
+        .hero .btn {
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            border: none;
+            padding: 15px 40px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            border-radius: 50px;
+            box-shadow: var(--shadow-lg);
+            transition: var(--transition);
+        }
+
+        .hero .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* About Section */
+        .about {
+            background-color: var(--light-bg);
+        }
+
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+            align-items: center;
+        }
+
+        .about-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .about-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .about-text p {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        /* Services Section */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .service-card {
+            background-color: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .service-card:hover .service-image {
+            transform: scale(1.1);
+        }
+
+        .service-content {
+            padding: 25px;
+        }
+
+        .service-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .service-content p {
+            margin-bottom: 20px;
+            color: var(--light-text);
+        }
+
+        /* Products Section */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .product-card {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .product-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+            transition: var(--transition);
+        }
+
+        .product-card:hover .product-image {
+            transform: scale(1.1);
+        }
+
+        .product-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-content h3 {
+            font-size: 1.2rem;
+            margin-bottom: 15px;
+        }
+
+        /* Clients Section */
+        .clients {
+            background-color: var(--light-bg);
+        }
+
+        .clients-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .client-logo {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: var(--transition);
+        }
+
+        .client-logo:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .client-logo img {
+            max-width: 80%;
+            max-height: 80%;
+            filter: grayscale(100%);
+            transition: var(--transition);
+        }
+
+        .client-logo:hover img {
+            filter: grayscale(0%);
+        }
+
+        /* Capabilities Section */
+        .capabilities-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 40px;
+        }
+
+        .capability-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+            background-color: var(--white);
+        }
+
+        .capability-item:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .capability-content {
+            padding: 30px;
+        }
+
+        .capability-content h3 {
+            font-size: 1.5rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+        }
+
+        .capability-content p {
+            margin-bottom: 15px;
+            color: var(--light-text);
+        }
+
+        /* Team Section */
+        .team {
+            background-color: var(--light-bg);
+        }
+
+        .team-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+            transition: var(--transition);
+        }
+
+        .team-image:hover {
+            transform: translateY(-10px);
+        }
+
+        .team-image img {
+            width: 100%;
+            height: auto;
+            transition: var(--transition);
+        }
+
+        .team-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 50px;
+        }
+
+        .contact-info-box {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .contact-icon {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 15px;
+            flex-shrink: 0;
+            transition: var(--transition);
+        }
+
+        .contact-item:hover .contact-icon {
+            transform: rotate(360deg);
+        }
+
+        .contact-details h4 {
+            font-size: 1.2rem;
+            margin-bottom: 5px;
+        }
+
+        .contact-details p, .contact-details a {
+            color: var(--light-text);
+            transition: var(--transition);
+        }
+
+        .contact-details a:hover {
+            color: var(--primary-color);
+        }
+
+        .contact-form {
+            background-color: var(--white);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(0, 134, 204, 0.1);
+            outline: none;
+        }
+
+        textarea.form-control {
+            height: 150px;
+            resize: vertical;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #222;
+            color: var(--white);
+            padding-top: 60px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background-color: var(--primary-color);
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            color: #bbb;
+        }
+
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #bbb;
+            transition: var(--transition);
+        }
+
+        .footer-links a:hover {
+            color: var(--primary-color);
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            margin-top: 40px;
+            border-top: 1px solid #444;
+            padding: 20px 0;
+            text-align: center;
+            color: #bbb;
+            font-size: 0.9rem;
+        }
+
+        /* Back to top button */
+        .back-to-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary-color);
+            color: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+            z-index: 99;
+        }
+
+        .back-to-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .back-to-top:hover {
+            background-color: var(--secondary-color);
+            transform: translateY(-5px);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--light-bg);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background-color: var(--white);
+            box-shadow: var(--shadow-lg);
+            z-index: 1001;
+            transition: var(--transition);
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            padding-bottom: 20px;
+            border-bottom: 1px solid var(--light-bg);
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 15px;
+        }
+
+        .mobile-menu ul li a {
+            display: block;
+            padding: 12px 15px;
+            color: var(--text-color);
+            text-decoration: none;
+            border-radius: 6px;
+            transition: var(--transition);
+            font-weight: 500;
+        }
+
+        .mobile-menu ul li a:hover {
+            background-color: var(--light-bg);
+            color: var(--primary-color);
+            padding-left: 20px;
+        }
+
+        .mobile-menu ul li a.active {
+            background-color: var(--primary-color);
+            color: var(--white);
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        /* Responsive Styles */
+        @media screen and (max-width: 1200px) {
+            .container {
+                max-width: 960px;
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .container {
+                max-width: 720px;
+            }
+
+            .services-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .clients-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+
+            .capabilities-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .container {
+                max-width: 540px;
+            }
+
+            .header-top .container {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .contact-info {
+                justify-content: center;
+            }
+
+            .social-links {
+                justify-content: center;
+            }
+
+            .main-nav {
+                display: none;
+            }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .clients-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .contact-content {
+                grid-template-columns: 1fr;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero .btn {
+                padding: 12px 30px;
+                font-size: 1rem;
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .container {
+                max-width: 100%;
+                padding: 0 15px;
+            }
+
+            .products-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .clients-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-heading h2 {
+                font-size: 2rem;
+            }
+
+            .hero h1 {
+                font-size: 2rem;
+            }
+        }
+
+        /* Product Modal Styles */
+        .product-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            visibility: hidden;
+            transition: var(--transition);
+        }
+
+        .product-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-modal-content {
+            background-color: var(--white);
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            border-radius: 10px;
+            overflow-y: auto;
+            position: relative;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .product-modal.active .product-modal-content {
+            transform: translateY(0);
+        }
+
+        .product-modal-close {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--text-color);
+            cursor: pointer;
+            z-index: 1;
+            transition: var(--transition);
+        }
+
+        .product-modal-close:hover {
+            color: var(--primary-color);
+            transform: rotate(90deg);
+        }
+
+        .product-modal-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            padding: 40px;
+        }
+
+        .product-modal-image {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+        }
+
+        .product-modal-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .product-modal-details h3 {
+            font-size: 2rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .product-modal-details p {
+            margin-bottom: 15px;
+            color: var(--light-text);
+            line-height: 1.6;
+        }
+
+        .product-specs {
+            margin-top: 30px;
+        }
+
+        .product-specs h4 {
+            font-size: 1.2rem;
+            color: var(--text-color);
+            margin-bottom: 15px;
+        }
+
+        .specs-list {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .specs-list li {
+            display: flex;
+            align-items: center;
+            margin-bottom: 10px;
+            color: var(--light-text);
+        }
+
+        .specs-list li i {
+            color: var(--primary-color);
+            margin-right: 10px;
+        }
+
+        @media screen and (max-width: 768px) {
+            .product-modal-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+        }
+
+        /* More Products Section */
+        .more-products {
+            display: none;
+            padding: 40px 0;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .more-products.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .more-products-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+            margin-top: 40px;
+            animation: fadeInUp 0.5s ease;
+        }
+
+        .view-more-btn {
+            text-align: center;
+            margin-top: 40px;
+            position: relative;
+        }
+
+        .view-more-btn button {
+            background: none;
+            border: 2px solid var(--primary-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 auto;
+        }
+
+        .view-more-btn button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+            z-index: -1;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+
+        .view-more-btn button:hover {
+            color: var(--white);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .view-more-btn button:hover::before {
+            transform: scaleX(1);
+            transform-origin: left;
+        }
+
+        .view-more-btn button i {
+            transition: transform 0.3s ease;
+        }
+
+        .view-more-btn button.active i {
+            transform: rotate(180deg);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media screen and (max-width: 992px) {
+            .more-products-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 768px) {
+            .more-products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media screen and (max-width: 576px) {
+            .more-products-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="header-top">
+            <div class="container">
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+        </div>
+        <div class="main-header">
+            <div class="container">
+                <div class="logo">
+                    <img src="photos/logo.png" alt="PanFlash Logo">
+                    <span>PANFLASH</span>
+                </div>
+                <nav class="main-nav">
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#clients">Clients</a></li>
+                        <li><a href="#capabilities">Capabilities</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </nav>
+                <button class="mobile-menu-btn">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu">
+        <div class="mobile-menu-header">
+            <div class="logo">PANFLASH</div>
+            <button class="close-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="#">Home</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#services">Services</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#clients">Clients</a></li>
+                <li><a href="#capabilities">Capabilities</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </div>
+    <div class="overlay"></div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Sound Systems Manufacturing Experts</h1>
+                <p>Providing customized sound system products for different industries with expertise and innovation.</p>
+                <a href="#contact" class="btn">Get in Touch</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <div class="section-heading">
+                <h2>About PanFlash</h2>
+                <p>Learn about our journey and expertise in sound system manufacturing</p>
+            </div>
+            <div class="about-content">
+                <div class="about-image">
+                    <img src="photos/teams.png" alt="About PanFlash">
+                </div>
+                <div class="about-text">
+                    <h3>Our Story</h3>
+                    <p>We are a sound systems manufacturing unit with a crucial aspect of the manufacturing industry, providing customized products for different sectors. Pankaj Kumar Sharma is the founder of this company. He worked as country manager for Forme mobile company (China), similar experience in Mobile Battery manufacturing and Cellio. After these job stints, he started his journey of manufacturing and parts in 2009.</p>
+                    <p>We were involved in manufacturing of Mobile Accessories like Mobile Charger, data cable, cables, ear-phones, and Bluetooth, full range speakers like of fans, PA series audio equipment, small trolley setups, table lamps etc.</p>
+                    <p>During the manufacturing journey we had many manufacturing sectors like PCB Unit, Li-Battery pack and backup systems manufacturing, Wire manufacturing Unit, Home Electronics Unit, Injection moulding unit and have Printing inside of PCB machine for direct automation and day tagging manufacturing etc.</p>
+                    <a href="#" class="btn">Learn More</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section id="services" class="services">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our Services</h2>
+                <p>Comprehensive sound system manufacturing solutions for your business needs</p>
+            </div>
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('photos/p1.png');"></div>
+                    <div class="service-content">
+                        <h3>OEM Manufacturing</h3>
+                        <p>Custom design and manufacturing services for various sound system components and products tailored to client specifications.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('photos/teams.png');"></div>
+                    <div class="service-content">
+                        <h3>Product Development</h3>
+                        <p>Research and development of innovative sound products using cutting-edge technology and real-time production quality for excellent results.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+                <div class="service-card">
+                    <div class="service-image" style="background-image: url('photos/p1.png');"></div>
+                    <div class="service-content">
+                        <h3>Power Backup Systems</h3>
+                        <p>Manufacturing of power backup systems based on UPS technologies and Li-ION Battery Management Systems for reliable performance.</p>
+                        <a href="#" class="btn">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Products Section -->
+    <section id="products" class="products">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our Products</h2>
+                <p>Explore our range of high-quality sound system products</p>
+            </div>
+            <div class="products-grid">
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('photos/p1.png');"></div>
+                    <div class="product-content">
+                        <h3>PA Series Audio Equipment</h3>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('photos/teams.png');"></div>
+                    <div class="product-content">
+                        <h3>Mobile Audio Systems</h3>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('photos/p1.png');"></div>
+                    <div class="product-content">
+                        <h3>Bluetooth Speakers</h3>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('photos/teams.png');"></div>
+                    <div class="product-content">
+                        <h3>Li-Battery Power Backups</h3>
+                        <a href="#" class="btn">View Details</a>
+                    </div>
+                </div>
+            </div>
+            <div class="view-more-btn">
+                <button id="viewMoreBtn">
+                    <span>View More Products</span>
+                    <i class="fas fa-chevron-down"></i>
+                </button>
+            </div>
+            <div class="more-products">
+                <div class="more-products-grid">
+                    <!-- Additional products will be added here -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Clients Section -->
+    <section id="clients" class="clients">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our Clients</h2>
+                <p>Companies that trust our products and services</p>
+            </div>
+            <div class="clients-grid">
+                <div class="client-logo">
+                    <img src="photos/amazon basic.jpeg" alt="Amazon Basic">
+                </div>
+                <div class="client-logo">
+                    <img src="photos/etriton.png" alt="Etriton">
+                </div>
+                <div class="client-logo">
+                    <img src="photos/mikashi.png" alt="Mikashi">
+                </div>
+                <div class="client-logo">
+                    <img src="photos/feltron.png" alt="Feltron">
+                </div>
+                <div class="client-logo">
+                    <img src="photos/oscar.png" alt="Oscar">
+                </div>
+                <div class="client-logo">
+                    <img src="photos/cliff.png" alt="Cliff Technologies">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Capabilities Section -->
+    <section id="capabilities" class="capabilities">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our Capabilities</h2>
+                <p>Expertise and resources that set us apart</p>
+            </div>
+            <div class="capabilities-grid">
+                <div class="capability-item">
+                    <div class="capability-content">
+                        <h3>Production Capability</h3>
+                        <p>800 SQ METER AREA OF ASSEMBLY WITH 26 MANPOWER AND WOODEN PLANT IN 140 SQ METER WITH 12 MANPOWER</p>
+                        <p>Our facility is equipped with advanced machinery and skilled professionals to deliver high-quality sound systems and components efficiently.</p>
+                    </div>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-content">
+                        <h3>Product Range</h3>
+                        <p>We specialize in various types of sound systems and components including speakers, amplifiers, and power backup systems.</p>
+                        <p>Our manufacturing capabilities extend to mobile audio systems, home theater systems, and professional audio equipment.</p>
+                    </div>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-content">
+                        <h3>Innovation and Technology</h3>
+                        <p>We employ advanced technologies in our manufacturing processes, including proprietary methods that set us apart from competitors.</p>
+                        <p>Our R&D team continuously works on innovative solutions to enhance sound quality and user experience.</p>
+                    </div>
+                </div>
+                <div class="capability-item">
+                    <div class="capability-content">
+                        <h3>Quality Assurance</h3>
+                        <p>We follow stringent quality control measures and certifications to ensure every product meets our high standards.</p>
+                        <p>Our team is capable of developing custom software for IT-enabled products, ensuring excellent performance across our range.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Team Section -->
+    <section id="team" class="team">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Our Team</h2>
+                <p>Meet the experts behind our exceptional products</p>
+            </div>
+            <div class="team-image">
+                <img src="photos/teams.png" alt="PanFlash Team">
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <div class="section-heading">
+                <h2>Contact Us</h2>
+                <p>Get in touch with our team for any inquiries or to discuss your sound system needs</p>
+            </div>
+            <div class="contact-content">
+                <div class="contact-info-box">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Our Location</h4>
+                            <p>235 FIRST FLOOR, ECOTECH III UDHYOG KENDRA II GREATER NOIDA-201306 (Uttar P)</p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Phone Number</h4>
+                            <p><a href="tel:+919999728848">+91-9999728848 (PANKAJ KUMAR SHARMA)</a></p>
+                        </div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-details">
+                            <h4>Email Address</h4>
+                            <p><a href="mailto:panflashtechnologies@gmail.com">panflashtechnologies@gmail.com</a></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <h3>Send us a Message</h3>
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" placeholder="Your Name" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="email" class="form-control" placeholder="Your Email" required>
+                        </div>
+                        <div class="form-group">
+                            <input type="tel" class="form-control" placeholder="Your Phone">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" placeholder="Your Message" required></textarea>
+                        </div>
+                        <button type="submit" class="btn">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>About Us</h3>
+                    <p>PanFlash Technology is a leading manufacturer of sound systems and audio equipment, providing innovative solutions for various industries.</p>
+                </div>
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#about">About</a></li>
+                        <li><a href="#services">Services</a></li>
+                        <li><a href="#products">Products</a></li>
+                        <li><a href="#contact">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Services</h3>
+                    <ul class="footer-links">
+                        <li><a href="#">OEM Manufacturing</a></li>
+                        <li><a href="#">Product Development</a></li>
+                        <li><a href="#">Power Backup Systems</a></li>
+                        <li><a href="#">Custom Solutions</a></li>
+                    </ul>
+                </div>
+                <div class="footer-column">
+                    <h3>Contact Info</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 235 FIRST FLOOR, ECOTECH III UDHYOG KENDRA II GREATER NOIDA-201306</p>
+                    <p><i class="fas fa-phone"></i> +91-9999728848</p>
+                    <p><i class="fas fa-envelope"></i> panflashtechnologies@gmail.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 PanFlash Technology. All Rights Reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <a href="#" class="back-to-top">
+        <i class="fas fa-arrow-up"></i>
+    </a>
+
+    <!-- Product Modal -->
+    <div class="product-modal">
+        <div class="product-modal-content">
+            <button class="product-modal-close">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="product-modal-grid">
+                <div class="product-modal-image">
+                    <img src="" alt="Product Image">
+                </div>
+                <div class="product-modal-details">
+                    <h3></h3>
+                    <p class="product-description"></p>
+                    <div class="product-specs">
+                        <h4>Specifications</h4>
+                        <ul class="specs-list"></ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Header Scroll Effect
+        const header = document.querySelector('header');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+        const closeMenuBtn = document.querySelector('.close-menu');
+        const mobileMenu = document.querySelector('.mobile-menu');
+        const overlay = document.querySelector('.overlay');
+
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.add('active');
+            overlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        });
+
+        closeMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        overlay.addEventListener('click', () => {
+            mobileMenu.classList.remove('active');
+            overlay.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        // Active Menu Item
+        const sections = document.querySelectorAll('section');
+        const navLinks = document.querySelectorAll('.main-nav a, .mobile-menu a');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (window.scrollY >= (sectionTop - sectionHeight / 3)) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+
+        // Smooth Scroll for Navigation Links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                    // Close mobile menu if open
+                    mobileMenu.classList.remove('active');
+                    overlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        });
+
+        // Back to Top Button
+        const backToTop = document.querySelector('.back-to-top');
+
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                backToTop.classList.add('active');
+            } else {
+                backToTop.classList.remove('active');
+            }
+        });
+
+        backToTop.addEventListener('click', (e) => {
+            e.preventDefault();
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+
+        // Form Submission
+        const contactForm = document.querySelector('.contact-form form');
+        contactForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // Add your form submission logic here
+            alert('Thank you for your message! We will get back to you soon.');
+            contactForm.reset();
+        });
+
+        // Product Modal
+        const productModal = document.querySelector('.product-modal');
+        const productModalClose = document.querySelector('.product-modal-close');
+        const productCards = document.querySelectorAll('.product-card');
+
+        // Product data
+        const products = {
+            'PA Series Audio Equipment': {
+                image: 'photos/p1.png',
+                description: 'High-quality PA series audio equipment designed for professional sound reinforcement. Perfect for concerts, events, and public address systems.',
+                specs: [
+                    'Power Output: 1000W RMS',
+                    'Frequency Response: 40Hz - 20kHz',
+                    'Impedance: 8 Ohms',
+                    'Input Sensitivity: 0.775V',
+                    'Protection: Thermal, Short Circuit, Overload'
+                ]
+            },
+            'Mobile Audio Systems': {
+                image: 'photos/teams.png',
+                description: 'Advanced mobile audio systems with superior sound quality and portability. Ideal for on-the-go entertainment and professional mobile setups.',
+                specs: [
+                    'Bluetooth 5.0 Connectivity',
+                    'Battery Life: Up to 12 hours',
+                    'Water Resistance: IPX5',
+                    'Speaker Output: 40W RMS',
+                    'Charging: USB-C Fast Charging'
+                ]
+            },
+            'Bluetooth Speakers': {
+                image: 'photos/p1.png',
+                description: 'Premium Bluetooth speakers with crystal clear sound and deep bass. Perfect for home, office, and outdoor use.',
+                specs: [
+                    'Bluetooth Version: 5.2',
+                    'Battery Life: 15 hours',
+                    'Driver Size: 2.5" Full Range',
+                    'Power Output: 20W RMS',
+                    'Water Resistance: IPX7'
+                ]
+            },
+            'Li-Battery Power Backups': {
+                image: 'photos/teams.png',
+                description: 'Reliable Li-Battery power backup systems for uninterrupted power supply. Suitable for both residential and commercial applications.',
+                specs: [
+                    'Battery Type: Lithium-Ion',
+                    'Capacity: 2000mAh',
+                    'Output Voltage: 12V DC',
+                    'Charging Time: 4 hours',
+                    'Protection: Overcharge, Over-discharge'
+                ]
+            },
+            'Professional PA System': {
+                image: 'photos/p1.png',
+                description: 'High-power professional PA system for large venues and events.',
+                specs: [
+                    'Power Output: 2000W RMS',
+                    'Frequency Response: 35Hz - 20kHz',
+                    'Impedance: 4/8 Ohms',
+                    'Input Sensitivity: 0.775V',
+                    'Protection: Thermal, Short Circuit'
+                ]
+            },
+            'Portable Sound System': {
+                image: 'photos/teams.png',
+                description: 'Compact and powerful portable sound system for mobile events.',
+                specs: [
+                    'Power Output: 500W RMS',
+                    'Battery Life: 8 hours',
+                    'Bluetooth Connectivity',
+                    'Water Resistance: IPX4',
+                    'Built-in Mixer'
+                ]
+            },
+            'Conference Speaker System': {
+                image: 'photos/p1.png',
+                description: 'Professional conference speaker system with clear voice reproduction.',
+                specs: [
+                    'Power Output: 300W RMS',
+                    'Frequency Response: 100Hz - 18kHz',
+                    'USB/Bluetooth Connectivity',
+                    'Built-in Microphone',
+                    'Echo Cancellation'
+                ]
+            },
+            'Outdoor Speaker System': {
+                image: 'photos/teams.png',
+                description: 'Weather-resistant outdoor speaker system for all conditions.',
+                specs: [
+                    'Power Output: 400W RMS',
+                    'Weather Resistance: IP65',
+                    'Frequency Response: 50Hz - 20kHz',
+                    'Mounting Options: Wall/Ceiling',
+                    'UV Protection'
+                ]
+            },
+            'Home Theater System': {
+                image: 'photos/p1.png',
+                description: 'Premium home theater system with surround sound experience.',
+                specs: [
+                    'Power Output: 1000W RMS',
+                    '5.1 Channel Surround',
+                    'Wireless Subwoofer',
+                    'HDMI/Bluetooth Connectivity',
+                    'Dolby Atmos Support'
+                ]
+            },
+            'DJ Speaker System': {
+                image: 'photos/teams.png',
+                description: 'Professional DJ speaker system with powerful bass response.',
+                specs: [
+                    'Power Output: 1500W RMS',
+                    'Frequency Response: 30Hz - 20kHz',
+                    'XLR/TRS Inputs',
+                    'Built-in Protection Circuit',
+                    'LED Display'
+                ]
+            },
+            'Portable PA System': {
+                image: 'photos/p1.png',
+                description: 'Compact portable PA system for small to medium venues.',
+                specs: [
+                    'Power Output: 800W RMS',
+                    'Battery Life: 6 hours',
+                    'Bluetooth/USB Connectivity',
+                    'Built-in Mixer',
+                    'Wireless Microphone Support'
+                ]
+            },
+            'Ceiling Speaker System': {
+                image: 'photos/teams.png',
+                description: 'Discreet ceiling speaker system for background music.',
+                specs: [
+                    'Power Output: 100W RMS',
+                    'Frequency Response: 80Hz - 20kHz',
+                    'Paintable Grille',
+                    'Easy Installation',
+                    '70V/100V Transformer'
+                ]
+            }
+        };
+
+        productCards.forEach(card => {
+            const viewDetailsBtn = card.querySelector('.btn');
+            const productTitle = card.querySelector('h3').textContent;
+
+            viewDetailsBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const product = products[productTitle];
+                
+                if (product) {
+                    const modalImage = productModal.querySelector('.product-modal-image img');
+                    const modalTitle = productModal.querySelector('.product-modal-details h3');
+                    const modalDescription = productModal.querySelector('.product-description');
+                    const modalSpecs = productModal.querySelector('.specs-list');
+
+                    modalImage.src = product.image;
+                    modalTitle.textContent = productTitle;
+                    modalDescription.textContent = product.description;
+                    
+                    modalSpecs.innerHTML = '';
+                    product.specs.forEach(spec => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<i class="fas fa-check"></i> ${spec}`;
+                        modalSpecs.appendChild(li);
+                    });
+
+                    productModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+
+        productModalClose.addEventListener('click', () => {
+            productModal.classList.remove('active');
+            document.body.style.overflow = '';
+        });
+
+        productModal.addEventListener('click', (e) => {
+            if (e.target === productModal) {
+                productModal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        });
+
+        // View More Products
+        const viewMoreBtn = document.getElementById('viewMoreBtn');
+        const moreProducts = document.querySelector('.more-products');
+        const moreProductsGrid = document.querySelector('.more-products-grid');
+
+        // Sample additional products (replace with actual products from PDF)
+        const additionalProducts = [
+            {
+                title: 'Professional PA System',
+                image: 'photos/p1.png',
+                description: 'High-power professional PA system for large venues and events.',
+                specs: [
+                    'Power Output: 2000W RMS',
+                    'Frequency Response: 35Hz - 20kHz',
+                    'Impedance: 4/8 Ohms',
+                    'Input Sensitivity: 0.775V',
+                    'Protection: Thermal, Short Circuit'
+                ]
+            },
+            {
+                title: 'Portable Sound System',
+                image: 'photos/teams.png',
+                description: 'Compact and powerful portable sound system for mobile events.',
+                specs: [
+                    'Power Output: 500W RMS',
+                    'Battery Life: 8 hours',
+                    'Bluetooth Connectivity',
+                    'Water Resistance: IPX4',
+                    'Built-in Mixer'
+                ]
+            },
+            {
+                title: 'Conference Speaker System',
+                image: 'photos/p1.png',
+                description: 'Professional conference speaker system with clear voice reproduction.',
+                specs: [
+                    'Power Output: 300W RMS',
+                    'Frequency Response: 100Hz - 18kHz',
+                    'USB/Bluetooth Connectivity',
+                    'Built-in Microphone',
+                    'Echo Cancellation'
+                ]
+            },
+            {
+                title: 'Outdoor Speaker System',
+                image: 'photos/teams.png',
+                description: 'Weather-resistant outdoor speaker system for all conditions.',
+                specs: [
+                    'Power Output: 400W RMS',
+                    'Weather Resistance: IP65',
+                    'Frequency Response: 50Hz - 20kHz',
+                    'Mounting Options: Wall/Ceiling',
+                    'UV Protection'
+                ]
+            },
+            {
+                title: 'Home Theater System',
+                image: 'photos/p1.png',
+                description: 'Premium home theater system with surround sound experience.',
+                specs: [
+                    'Power Output: 1000W RMS',
+                    '5.1 Channel Surround',
+                    'Wireless Subwoofer',
+                    'HDMI/Bluetooth Connectivity',
+                    'Dolby Atmos Support'
+                ]
+            },
+            {
+                title: 'DJ Speaker System',
+                image: 'photos/teams.png',
+                description: 'Professional DJ speaker system with powerful bass response.',
+                specs: [
+                    'Power Output: 1500W RMS',
+                    'Frequency Response: 30Hz - 20kHz',
+                    'XLR/TRS Inputs',
+                    'Built-in Protection Circuit',
+                    'LED Display'
+                ]
+            },
+            {
+                title: 'Portable PA System',
+                image: 'photos/p1.png',
+                description: 'Compact portable PA system for small to medium venues.',
+                specs: [
+                    'Power Output: 800W RMS',
+                    'Battery Life: 6 hours',
+                    'Bluetooth/USB Connectivity',
+                    'Built-in Mixer',
+                    'Wireless Microphone Support'
+                ]
+            },
+            {
+                title: 'Ceiling Speaker System',
+                image: 'photos/teams.png',
+                description: 'Discreet ceiling speaker system for background music.',
+                specs: [
+                    'Power Output: 100W RMS',
+                    'Frequency Response: 80Hz - 20kHz',
+                    'Paintable Grille',
+                    'Easy Installation',
+                    '70V/100V Transformer'
+                ]
+            }
+        ];
+
+        // Function to create product card
+        function createProductCard(product) {
+            return `
+                <div class="product-card">
+                    <div class="product-image" style="background-image: url('${product.image}');"></div>
+                    <div class="product-content">
+                        <h3>${product.title}</h3>
+                        <a href="#" class="btn view-details-btn">View Details</a>
+                    </div>
+                </div>
+            `;
+        }
+
+        // Add additional products to the grid
+        additionalProducts.forEach(product => {
+            moreProductsGrid.innerHTML += createProductCard(product);
+        });
+
+        // Toggle more products visibility
+        viewMoreBtn.addEventListener('click', () => {
+            moreProducts.classList.toggle('active');
+            const button = viewMoreBtn.querySelector('span');
+            const icon = viewMoreBtn.querySelector('i');
+            
+            if (moreProducts.classList.contains('active')) {
+                button.textContent = 'Show Less';
+                icon.classList.add('active');
+                // Scroll to the more products section smoothly
+                moreProducts.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            } else {
+                button.textContent = 'View More Products';
+                icon.classList.remove('active');
+                // Scroll back to the products section
+                document.querySelector('#products').scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+
+        // Add click event to new product cards
+        document.querySelectorAll('.more-products .view-details-btn').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.preventDefault();
+                const card = e.target.closest('.product-card');
+                const title = card.querySelector('h3').textContent;
+                const product = additionalProducts.find(p => p.title === title);
+                
+                if (product) {
+                    const modalImage = productModal.querySelector('.product-modal-image img');
+                    const modalTitle = productModal.querySelector('.product-modal-details h3');
+                    const modalDescription = productModal.querySelector('.product-description');
+                    const modalSpecs = productModal.querySelector('.specs-list');
+
+                    modalImage.src = product.image;
+                    modalTitle.textContent = product.title;
+                    modalDescription.textContent = product.description;
+                    
+                    modalSpecs.innerHTML = '';
+                    product.specs.forEach(spec => {
+                        const li = document.createElement('li');
+                        li.innerHTML = `<i class="fas fa-check"></i> ${spec}`;
+                        modalSpecs.appendChild(li);
+                    });
+
+                    productModal.classList.add('active');
+                    document.body.style.overflow = 'hidden';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
